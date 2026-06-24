@@ -50,6 +50,14 @@ export default function Newsletter() {
           No spam. Unsubscribe anytime.
         </p>
       </div>
+      <style>{`
+        @media (max-width: 480px) {
+          section form { flex-direction: column !important; gap: 8px !important; border-radius: var(--radius-md) !important; }
+          section form input { border-radius: var(--radius-md) !important; width: 100% !important; text-align: center !important; }
+          section form button { border-radius: var(--radius-md) !important; width: 100% !important; }
+          section { padding: 32px 0 !important; }
+        }
+      `}</style>
     </section>
   )
 }

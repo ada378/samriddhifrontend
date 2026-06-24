@@ -162,9 +162,21 @@ export default function Dashboard() {
 
       <style>{`
         @media (max-width: 768px) {
-          .container > div:nth-child(2) { grid-template-columns: repeat(2, 1fr) !important; }
+          .container > div:nth-child(2) { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
           .container > div:nth-child(3) { grid-template-columns: 1fr !important; }
           .container > div:nth-child(3) > div:first-child > div:first-child { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .container > div:nth-child(2) { grid-template-columns: 1fr 1fr !important; gap: 8px !important; }
+          .container > div:nth-child(2) .card { padding: 12px !important; }
+          .container > div:nth-child(2) .card svg { width: 18px !important; height: 18px !important; }
+          .container > div:nth-child(2) .card div:first-child > div:first-child { width: 36px !important; height: 36px !important; }
+          .container > div:nth-child(2) .card div:first-child > div:last-child div:first-child { font-size: 1.125rem !important; }
+          .container > div:first-child { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
+          .container > div:first-child h2 { font-size: 1.125rem !important; }
+        }
+        @media (max-width: 360px) {
+          .container > div:nth-child(2) { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </div>

@@ -56,8 +56,14 @@ export default function BlogInsights() {
       </div>
 
       <style>{`
+        @media (max-width: 1024px) {
+          section .container > div { grid-template-columns: repeat(2, 1fr) !important; }
+        }
         @media (max-width: 768px) {
-          .container > div { grid-template-columns: 1fr !important; }
+          section .container > div { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          section .container > div .card { max-width: 100% !important; }
         }
       `}</style>
     </section>

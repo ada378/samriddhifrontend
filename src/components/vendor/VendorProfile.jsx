@@ -295,6 +295,24 @@ export default function VendorProfile({ vendorSlug }) {
           .container > div.grid { grid-template-columns: 1fr !important; }
           .mobile-sticky-cta { display: block !important; }
           .container(>) > div:first-child > div:first-child { flex-direction: column !important; }
+          /* Vendor banner */
+          div[style*="height: 200"] { height: 140px !important; }
+          div[style*="bottom: -40"] { left: 16px !important; }
+          div[style*="bottom: -40"] > div:first-child { width: 72px !important; height: 72px !important; font-size: 1.5rem !important; }
+          div[style*="bottom: -40"] h2 { font-size: 1.125rem !important; }
+          /* Info grid */
+          .container > div:nth-child(2) > div:first-child { display: grid !important; grid-template-columns: 1fr !important; gap: 24px !important; }
+          .container > div:nth-child(2) > div:first-child > div:last-child { order: -1 !important; }
+          /* Stats grid */
+          .container > div:nth-child(2) > div:first-child > div:first-child > div:last-child { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+        }
+        @media (max-width: 480px) {
+          div[style*="height: 200"] { height: 120px !important; }
+          div[style*="bottom: -40"] { left: 12px !important; }
+          div[style*="bottom: -40"] > div:first-child { width: 60px !important; height: 60px !important; font-size: 1.25rem !important; }
+          div[style*="bottom: -40"] h2 { font-size: 1rem !important; }
+          .container > div:nth-child(2) > div:first-child > div:first-child > div:last-child { grid-template-columns: 1fr 1fr !important; }
+          .tabs .tab { font-size: 0.75rem !important; padding: 8px 12px !important; }
         }
         @media (min-width: 769px) {
           .mobile-sticky-cta { display: none !important; }

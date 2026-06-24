@@ -257,9 +257,19 @@ export default function Footer() {
           .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 24px !important; }
           .footer-bottom-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
           .footer-copyright { flex-direction: column !important; gap: 8px !important; text-align: center !important; }
+          .footer-copyright > div:last-child { flex-wrap: wrap !important; justify-content: center !important; }
+          footer .container > div:first-child { gap: 20px !important; }
+          footer h4 { font-size: 0.875rem !important; }
         }
         @media (max-width: 480px) {
           .footer-grid { grid-template-columns: 1fr !important; }
+          footer .container { padding-top: 24px !important; }
+          footer .container > div:first-child { padding-bottom: 24px !important; }
+        }
+        @media (max-width: 360px) {
+          footer form { flex-direction: column !important; gap: 8px !important; }
+          footer form input { border-radius: var(--radius-md) !important; }
+          footer form button { border-radius: var(--radius-md) !important; width: 100% !important; }
         }
       `}</style>
     </footer>

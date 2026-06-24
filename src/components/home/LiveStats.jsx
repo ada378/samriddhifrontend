@@ -58,7 +58,14 @@ export default function LiveStats() {
 
       <style>{`
         @media (max-width: 768px) {
-          .container > div { grid-template-columns: repeat(2, 1fr) !important; }
+          section .container > div { grid-template-columns: repeat(2, 1fr) !important; }
+          section .container > div div { padding: 20px 12px !important; }
+          section .container > div span:first-of-type { font-size: 1.5rem !important; }
+        }
+        @media (max-width: 375px) {
+          section .container > div div { padding: 16px 8px !important; }
+          section .container > div span:first-of-type { font-size: 1.25rem !important; }
+          section .container > div span:last-of-type { font-size: 0.75rem !important; }
         }
       `}</style>
     </section>
