@@ -1,0 +1,16 @@
+{
+  "name": "Samriddhi - Namak Bazaar",
+  "short_name": "Samriddhi",
+  "description": "India's premier multi-vendor salt marketplace",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#CC0C2C",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
