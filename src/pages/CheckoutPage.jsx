@@ -95,7 +95,7 @@ export default function CheckoutPage() {
     return false
   }
 
-  const handlePlaceOrder = () => {
+  const handlePlaceOrder = async () => {
     if (!user) { showToast('Please login first', 'error'); navigate('/login'); return }
 
     if (paymentMethod === 'razorpay') {
@@ -111,18 +111,24 @@ export default function CheckoutPage() {
             name: 'Samriddhi Marketplace',
             description: `Order from ${cart.length} item(s)`,
             image: 'https://samriddhi.in/favicon.png',
-            handler: function (response) {
-              placeOrder({
-                items: cart.map(item => ({ product: item.product, productId: item.product.id, vendorId: item.vendorId, quantity: item.quantity, price: item.product.price })),
-                total: totals.grand,
-                paymentMethod: 'razorpay',
-                paymentStatus: 'paid',
-                razorpayPaymentId: response.razorpay_payment_id,
-                deliveryAddress: selectedAddress?.line1 + ', ' + selectedAddress?.city + ', ' + selectedAddress?.state + ' - ' + selectedAddress?.pincode,
-                status: 'confirmed',
-              })
-              showToast('Payment successful! Order placed 🎉', 'success')
-              navigate('/order-confirmation')
+            handler: async function (response) {
+              try {
+                const orderData = {
+                  items: cart.map(item => ({ product: item.product, productId: item.product.id, vendorId: item.vendorId, quantity: item.quantity, price: item.product.price })),
+                  total: totals.grand,
+                  paymentMethod: 'razorpay',
+                  paymentStatus: 'paid',
+                  razorpayPaymentId: response.razorpay_payment_id,
+                  deliveryAddress: selectedAddress?.line1 + ', ' + selectedAddress?.city + ', ' + selectedAddress?.state + ' - ' + selectedAddress?.pincode,
+                  status: 'confirmed',
+                }
+                await api.orders.create(orderData)
+                placeOrder(orderData)
+                showToast('Payment successful! Order placed 🎉', 'success')
+                navigate('/order-confirmation')
+              } catch (err) {
+                showToast('Order creation failed: ' + err.message, 'error')
+              }
             },
             prefill: { name: user?.name || '', email: user?.email || '', contact: '' },
             theme: { color: '#1A56DB' },
@@ -148,16 +154,22 @@ export default function CheckoutPage() {
       quantity: item.quantity,
       price: item.product.price,
     }))
-    placeOrder({
+    const orderData = {
       items,
       total: totals.grand,
       paymentMethod,
       paymentStatus: paymentMethod === 'cod' ? 'pending' : 'paid',
       deliveryAddress: selectedAddress?.line1 + ', ' + selectedAddress?.city + ', ' + selectedAddress?.state + ' - ' + selectedAddress?.pincode,
       status: 'confirmed',
-    })
-    showToast('Order placed successfully! 🎉', 'success')
-    navigate('/order-confirmation')
+    }
+    try {
+      await api.orders.create(orderData)
+      placeOrder(orderData)
+      showToast('Order placed successfully! 🎉', 'success')
+      navigate('/order-confirmation')
+    } catch (err) {
+      showToast('Order creation failed: ' + err.message, 'error')
+    }
   }
 
   const sectionStyle = {

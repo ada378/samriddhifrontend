@@ -57,7 +57,11 @@ export const api = {
   vendors: (params) => request(`/vendors?${new URLSearchParams(params || {})}`),
   vendor: (slug) => request(`/vendors/${slug}`),
   reviews: (params) => request(`/reviews?${new URLSearchParams(params || {})}`),
-  orders: (params) => request(`/orders?${new URLSearchParams(params || {})}`),
+  orders: {
+    list: (params) => request(`/orders?${new URLSearchParams(params || {})}`),
+    create: (data) => request('/orders', { method: 'POST', body: JSON.stringify(data) }),
+    get: (id) => request(`/orders/${id}`),
+  },
 
   // Auth
   login: (email, password) =>

@@ -80,7 +80,7 @@ export default function FlashDeals() {
           <Timer target={targetRef.current} />
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
+        <div className="flash-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
           {deals.map(product => (
             <Card key={product.id} hover padding="0" style={{ cursor: 'pointer' }} onClick={() => navigate(`/products/${product.slug}`)}>
               <div style={{ position: 'relative' }}>
@@ -110,12 +110,8 @@ export default function FlashDeals() {
       </div>
 
       <style>{`
-        @media (max-width: 768px) {
-          .container > div:last-child { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-        @media (max-width: 375px) {
-          .container > div:last-child { grid-template-columns: 1fr !important; }
-        }
+        @media (max-width: 1024px) { .flash-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; } }
+        @media (max-width: 480px) { .flash-grid { grid-template-columns: 1fr !important; } }
       `}</style>
     </section>
   )

@@ -69,6 +69,7 @@ export default function HeroBanner() {
         display: 'flex',
         alignItems: 'center',
       }}
+      className="hero-section"
     >
       {slides.map((slide, i) => (
         <div
@@ -144,6 +145,11 @@ export default function HeroBanner() {
       <style>{`
         @media (max-width: 768px) {
           .desktop-arrow { display: none; }
+          .hero-section { min-height: 380px !important; }
+          .hero-section .container { padding-top: 40px !important; padding-bottom: 40px !important; }
+        }
+        @media (max-width: 480px) {
+          .hero-section { min-height: 320px !important; }
         }
       `}</style>
     </section>

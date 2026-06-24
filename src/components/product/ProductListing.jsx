@@ -21,6 +21,7 @@ export default function ProductListing({ category, vendorId }) {
   const [sort, setSort] = useState('relevance')
   const [filters, setFilters] = useState({})
   const [page, setPage] = useState(1)
+  const [showMobileFilter, setShowMobileFilter] = useState(false)
 
   useEffect(() => {
     api.products()
@@ -61,6 +62,25 @@ export default function ProductListing({ category, vendorId }) {
       <div style={{ flex: '0 0 260px', minWidth: 0 }} className="desktop-filter">
         <FilterPanel filters={filters} onChange={setFilters} />
       </div>
+      <button className="mobile-filter-toggle btn btn-secondary btn-sm" onClick={() => setShowMobileFilter(true)}
+        style={{ display: 'none', alignItems: 'center', gap: 6 }}>
+        <Icon name="filter" size={16} /> Filters
+      </button>
+      {showMobileFilter && (
+        <div className="mobile-filter-overlay" onClick={() => setShowMobileFilter(false)}
+          style={{ position: 'fixed', inset: 0, zIndex: 9999, background: 'rgba(0,0,0,0.5)' }}>
+          <div style={{ position: 'fixed', top: 0, left: 0, bottom: 0, width: 280, background: 'var(--bg-white)', padding: 24, overflowY: 'auto' }}
+            onClick={e => e.stopPropagation()}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+              <h4 style={{ margin: 0 }}>Filters</h4>
+              <button onClick={() => setShowMobileFilter(false)} style={{ border: 'none', background: 'none', cursor: 'pointer', padding: 4 }}>
+                <Icon name="close" size={20} />
+              </button>
+            </div>
+            <FilterPanel filters={filters} onChange={(f) => { setFilters(f); setShowMobileFilter(false) }} />
+          </div>
+        </div>
+      )}
 
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 12, marginBottom: 16 }}>
@@ -112,7 +132,7 @@ export default function ProductListing({ category, vendorId }) {
           <FilterChips filters={filters} onChange={setFilters} />
         )}
 
-        <div style={{
+        <div className="product-grid" style={{
           display: viewMode === 'grid' ? 'grid' : 'flex',
           gridTemplateColumns: 'repeat(3, 1fr)',
           flexDirection: viewMode === 'list' ? 'column' : undefined,
@@ -146,9 +166,17 @@ export default function ProductListing({ category, vendorId }) {
       <style>{`
         @media (max-width: 1024px) {
           .container > div > div:first-child { flex-basis: 220px !important; }
+          .product-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
         @media (max-width: 768px) {
           .desktop-filter { display: none; }
+          .mobile-filter-toggle { display: inline-flex !important; }
+          .product-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+        }
+        @media (max-width: 480px) {
+          .product-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 640px) {
           .container > div { flex-direction: column !important; }
         }
       `}</style>

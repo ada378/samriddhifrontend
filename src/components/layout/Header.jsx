@@ -52,16 +52,16 @@ export default function Header() {
     <>
       <div style={{
         background: 'var(--secondary)', color: 'rgba(255,255,255,0.85)', fontSize: '0.8rem',
-        padding: '8px 0', display: 'flex', alignItems: 'center',
+        padding: '6px 0', display: 'flex', alignItems: 'center',
       }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 4 }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        <div className="container top-bar" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 4 }}>
+          <span className="top-bar-item" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <Icon name="phone" size={12} /> +91 9151810643
           </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span className="top-bar-item top-bar-hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <Icon name="mail" size={12} /> samridhiblacksalt@gmail.com
           </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <span className="top-bar-item top-bar-hide-mobile" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <Icon name="location" size={12} /> Mahmudabad, Sitapur, UP
           </span>
         </div>
@@ -70,13 +70,13 @@ export default function Header() {
         position: 'sticky', top: 0, zIndex: 1000, background: 'var(--bg-white)',
         borderBottom: '2px solid var(--primary)', boxShadow: 'var(--shadow-sm)',
       }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', gap: 16, height: 'var(--header-height)' }}>
+        <div className="container header-row" style={{ display: 'flex', alignItems: 'center', gap: 8, height: 'var(--header-height)' }}>
           <button onClick={() => setMenuOpen(!menuOpen)} className="hamburger-btn" aria-label="Menu">
             <Icon name="menu" size={24} />
           </button>
 
-          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', flexShrink: 0 }}>
-            <img src={logoImg} alt="Samriddhi" style={{ height: 64, width: 64, borderRadius: '50%', objectFit: 'cover' }} />
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', flexShrink: 0 }}>
+            <img src={logoImg} alt="Samriddhi" className="header-logo" style={{ height: 56, width: 56, borderRadius: '50%', objectFit: 'cover' }} />
           </Link>
 
           <div className="search-desktop" style={{ flex: 1, maxWidth: 440 }}>
@@ -208,13 +208,20 @@ export default function Header() {
       )}
 
       <style>{`
-        .hamburger-btn { display: none; background: none; border: none; padding: 8px; cursor: pointer; color: var(--text-primary); }
+        .hamburger-btn { display: none; background: none; border: none; padding: 6px; cursor: pointer; color: var(--text-primary); }
         .search-mobile { display: none; }
+        @media (max-width: 1024px) {
+          .header-logo { height: 48px !important; width: 48px !important; }
+          .header-row { gap: 6px !important; }
+        }
         @media (max-width: 768px) {
+          :root { --header-height: 60px !important; }
           .hamburger-btn { display: flex; }
           .search-desktop { display: none !important; }
           .search-mobile { display: block; }
           .cat-label, .user-name, .auth-signup { display: none; }
+          .top-bar { font-size: 0.7rem !important; justify-content: center !important; }
+          .top-bar-hide-mobile { display: none !important; }
         }
         @media (min-width: 769px) {
           .search-desktop { display: block !important; }
