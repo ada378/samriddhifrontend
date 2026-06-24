@@ -34,15 +34,10 @@ export default function TrustSignals() {
 
       <style>{`
         @media (max-width: 768px) {
-          section .container > div { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
-          section .container > div div { gap: 6px !important; padding: 6px 8px !important; }
+          .container > div { grid-template-columns: repeat(3, 1fr) !important; }
         }
-        @media (max-width: 480px) {
-          section .container > div { grid-template-columns: repeat(2, 1fr) !important; }
-          section .container > div span { font-size: 0.6875rem !important; white-space: normal !important; }
-        }
-        @media (max-width: 360px) {
-          section .container > div { grid-template-columns: 1fr 1fr !important; }
+        @media (max-width: 375px) {
+          .container > div { grid-template-columns: repeat(2, 1fr) !important; }
         }
       `}</style>
     </section>

@@ -84,7 +84,7 @@ export default function VendorListing() {
 
         {activeFilters.length > 0 && <FilterChips filters={filters} onChange={setFilters} />}
 
-        <div className="vendor-grid" style={{
+        <div style={{
           display: viewMode === 'grid' ? 'grid' : 'flex',
           gridTemplateColumns: 'repeat(3, 1fr)',
           flexDirection: viewMode === 'list' ? 'column' : undefined,
@@ -105,16 +105,9 @@ export default function VendorListing() {
       </div>
 
       <style>{`
-        @media (max-width: 1024px) {
-          .desktop-filter { flex-basis: 220px !important; }
-        }
         @media (max-width: 768px) {
           .desktop-filter { display: none; }
-          .vendor-grid { grid-template-columns: repeat(2, 1fr) !important; }
-          [class*="VendorListing"] > div:first-child { flex-direction: column !important; }
-        }
-        @media (max-width: 480px) {
-          .vendor-grid { grid-template-columns: 1fr !important; }
+          .container > div { flex-direction: column !important; }
         }
       `}</style>
     </div>

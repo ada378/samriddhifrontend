@@ -79,19 +79,11 @@ export default function CategoryGrid() {
       </div>
 
       <style>{`
-        @media (max-width: 1024px) {
-          section .container > div { grid-template-columns: repeat(3, 1fr) !important; }
-        }
         @media (max-width: 768px) {
-          section .container > div { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
+          .container > div { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
         }
-        @media (max-width: 480px) {
-          section .container > div { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
-          section .container > div button { padding: 16px 12px !important; }
-          section .container > div span:first-of-type { width: 56px !important; height: 56px !important; font-size: 1.75rem !important; }
-        }
-        @media (max-width: 360px) {
-          section .container > div { grid-template-columns: 1fr !important; }
+        @media (max-width: 375px) {
+          .container > div { grid-template-columns: repeat(1, 1fr) !important; }
         }
       `}</style>
     </section>

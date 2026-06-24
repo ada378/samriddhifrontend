@@ -1,8 +1,24 @@
 const API_BASE = 'http://localhost:5000/api'
 const IMAGE_BASE = 'http://localhost:5000'
 
-export function resolveImage(url) {
-  if (!url) return ''
+const fallbackImages = {
+  'rock-salt': 'https://images.unsplash.com/photo-1590936193656-b4e8e9e3e2b5?w=400&auto=format',
+  'sendha-namak': 'https://images.unsplash.com/photo-1590936193656-b4e8e9e3e2b5?w=400&auto=format',
+  'sea-salt': 'https://images.unsplash.com/photo-1621315892013-f32af7358947?w=400&auto=format',
+  'iodized-salt': 'https://images.unsplash.com/photo-1621315892013-f32af7358947?w=400&auto=format',
+  'black-salt': 'https://images.unsplash.com/photo-1590936193656-b4e8e9e3e2b5?w=400&auto=format',
+  'industrial-salt': 'https://images.unsplash.com/photo-1590936193656-b4e8e9e3e2b5?w=400&auto=format',
+  'organic-salt': 'https://images.unsplash.com/photo-1621315892013-f32af7358947?w=400&auto=format',
+  'flavoured-salt': 'https://images.unsplash.com/photo-1590936193656-b4e8e9e3e2b5?w=400&auto=format',
+}
+
+const defaultFallback = 'https://images.unsplash.com/photo-1621315892013-f32af7358947?w=400&auto=format'
+
+export function resolveImage(url, category) {
+  if (!url) {
+    if (category && fallbackImages[category]) return fallbackImages[category]
+    return defaultFallback
+  }
   if (url.startsWith('http')) return url
   return IMAGE_BASE + url
 }

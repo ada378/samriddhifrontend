@@ -42,14 +42,11 @@ export default function RecentlyViewed() {
       </div>
 
       <style>{`
-        @media (max-width: 1024px) {
-          section .container > div { grid-template-columns: repeat(4, 1fr) !important; }
-        }
         @media (max-width: 768px) {
-          section .container > div { grid-template-columns: repeat(3, 1fr) !important; gap: 10px !important; }
+          .container > div { grid-template-columns: repeat(3, 1fr) !important; }
         }
-        @media (max-width: 480px) {
-          section .container > div { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+        @media (max-width: 375px) {
+          .container > div { grid-template-columns: repeat(2, 1fr) !important; }
         }
       `}</style>
     </section>

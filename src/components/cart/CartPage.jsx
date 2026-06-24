@@ -260,14 +260,6 @@ export default function CartPage() {
       <style>{`
         @media (max-width: 768px) {
           .container > div:last-child { grid-template-columns: 1fr !important; }
-          .container > div:last-child > div:first-child > div > div:last-child > div { flex-wrap: wrap !important; gap: 8px !important; }
-          .container > div:last-child > div:first-child > div > div:last-child > div > div:first-child { width: 64px !important; height: 64px !important; }
-        }
-        @media (max-width: 480px) {
-          .container > div:last-child > div:first-child > div > div:last-child > div { flex-direction: column !important; }
-          .container > div:last-child > div:first-child > div > div:last-child > div > div:first-child { width: 100% !important; height: auto !important; max-height: 180px !important; }
-          .container > div:last-child > div:first-child > div > div:last-child > div > div:nth-child(2) { width: 100% !important; }
-          .container > div:last-child > div:first-child > div > div:last-child > div > div:last-child { flex-direction: row !important; width: 100% !important; justify-content: space-between !important; align-items: center !important; }
         }
       `}</style>
     </div>

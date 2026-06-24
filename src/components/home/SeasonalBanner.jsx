@@ -30,13 +30,6 @@ export default function SeasonalBanner() {
           Grab the Deal
         </Button>
       </div>
-      <style>{`
-        @media (max-width: 480px) {
-          section { padding: 32px 0 !important; }
-          section h2 { font-size: clamp(1.125rem, 5vw, 1.5rem) !important; }
-          section p { font-size: 0.875rem !important; }
-        }
-      `}</style>
     </section>
   )
 }

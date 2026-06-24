@@ -65,8 +65,7 @@ export default function FlashDeals() {
   }
 
   const imgSrc = (product) => {
-    if (product.images && product.images[0]) return resolveImage(product.images[0])
-    return 'https://via.placeholder.com/400'
+    return resolveImage(product.images?.[0], product.category)
   }
 
   return (
@@ -110,19 +109,8 @@ export default function FlashDeals() {
       </div>
 
       <style>{`
-        @media (max-width: 1024px) {
-          section .flash-grid { grid-template-columns: repeat(2, 1fr) !important; }
-        }
-        @media (max-width: 768px) {
-          section .flash-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
-        }
-        @media (max-width: 480px) {
-          section .flash-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
-          section .flash-grid .card img { aspect-ratio: 1/1 !important; }
-        }
-        @media (max-width: 360px) {
-          section .flash-grid { grid-template-columns: 1fr !important; }
-        }
+        @media (max-width: 1024px) { .flash-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; } }
+        @media (max-width: 480px) { .flash-grid { grid-template-columns: 1fr !important; } }
       `}</style>
     </section>
   )

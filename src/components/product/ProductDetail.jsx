@@ -276,33 +276,16 @@ export default function ProductDetail({ productSlug }) {
             ))}
           </div>
           <style>{`
-            @media (max-width: 1024px) { .container > section > div { grid-template-columns: repeat(3, 1fr) !important; } }
-            @media (max-width: 768px) { .container > section > div { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; } }
-            @media (max-width: 480px) { .container > section > div { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; } }
-            @media (max-width: 360px) { .container > section > div { grid-template-columns: 1fr !important; } }
+            @media (max-width: 768px) { .container > section > div { grid-template-columns: repeat(2, 1fr) !important; } }
+            @media (max-width: 375px) { .container > section > div { grid-template-columns: 1fr !important; } }
           `}</style>
         </section>
       )}
 
       <style>{`
-        @media (max-width: 1024px) {
-          .container > div:first-child { gap: 24px !important; }
-          .container > div:first-child > div:first-child { flex: 0 0 380px !important; }
-        }
         @media (max-width: 768px) {
           .container > div:first-child { flex-direction: column !important; gap: 20px !important; }
-          .container > div:first-child > div:first-child { flex-basis: auto !important; max-width: 100% !important; }
-          .container > div:first-child > div:first-child > div:last-child { flex-wrap: wrap !important; }
-          .container > div:first-child > div:first-child > div:last-child button { width: 56px !important; height: 56px !important; }
-          .container > div:first-child > div:last-child h1 { font-size: 1.25rem !important; }
-        }
-        @media (max-width: 480px) {
-          .container > div:first-child > div:first-child > div:last-child button { width: 48px !important; height: 48px !important; }
-          .container > div:first-child > div:last-child > div:nth-child(5) { flex-direction: column !important; }
-          .container > div:first-child > div:last-child > div:nth-child(5) .quantity-stepper { width: 100% !important; justify-content: center !important; }
-          .container > div:first-child > div:last-child > div:nth-child(5) button { flex: 1 !important; }
-          .container > div:first-child > div:last-child > div:nth-child(6) { flex-wrap: wrap !important; }
-          .container > div:first-child > div:last-child > div:nth-child(6) button { flex: 1 !important; min-width: 0 !important; justify-content: center !important; }
+          .container > div:first-child > div:first-child { flex-basis: auto !important; }
         }
       `}</style>
     </div>

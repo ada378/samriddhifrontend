@@ -220,19 +220,8 @@ export default function Header() {
           .search-desktop { display: none !important; }
           .search-mobile { display: block; }
           .cat-label, .user-name, .auth-signup { display: none; }
-          .top-bar { font-size: 0.7rem !important; justify-content: center !important; padding: 4px 12px !important; }
+          .top-bar { font-size: 0.7rem !important; justify-content: center !important; }
           .top-bar-hide-mobile { display: none !important; }
-          .header-row { height: 52px !important; padding: 0 8px !important; gap: 4px !important; }
-          header .btn { padding: 4px 6px !important; font-size: 0.75rem !important; }
-          header .btn-icon { width: 32px !important; height: 32px !important; }
-          .search-mobile { padding: 0 8px 8px !important; }
-        }
-        @media (max-width: 480px) {
-          .header-row > div:last-child { gap: 2px !important; }
-          header .btn-secondary, header .btn-primary { padding: 4px 8px !important; font-size: 0.6875rem !important; }
-        }
-        @media (max-width: 360px) {
-          .header-logo { height: 36px !important; width: 36px !important; }
         }
         @media (min-width: 769px) {
           .search-desktop { display: block !important; }
