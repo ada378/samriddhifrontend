@@ -106,7 +106,7 @@ export default function ProductDetail({ productSlug }) {
             onMouseMove={handleZoom}
           >
             <img
-              src={resolveImage(product.images[selectedImage])}
+              src={resolveImage(product.images?.[selectedImage], product.category)}
               alt={product.name}
               style={{
                 width: '100%',
@@ -134,7 +134,7 @@ export default function ProductDetail({ productSlug }) {
                   transition: 'border-color 0.2s',
                 }}
               >
-                <img src={resolveImage(img)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src={resolveImage(img, product.category)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </button>
             ))}
           </div>

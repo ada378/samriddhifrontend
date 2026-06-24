@@ -65,8 +65,7 @@ export default function FlashDeals() {
   }
 
   const imgSrc = (product) => {
-    if (product.images && product.images[0]) return resolveImage(product.images[0])
-    return 'https://via.placeholder.com/400'
+    return resolveImage(product.images?.[0], product.category)
   }
 
   return (

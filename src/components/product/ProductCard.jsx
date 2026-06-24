@@ -76,7 +76,7 @@ export default function ProductCard({ product, view = 'grid' }) {
       >
         {!imgError ? (
           <img
-            src={resolveImage(product.images[0])}
+            src={resolveImage(product.images?.[0], product.category)}
             alt={product.name}
             onError={() => setImgError(true)}
             style={{

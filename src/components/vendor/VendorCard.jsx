@@ -59,7 +59,7 @@ export default function VendorCard({ vendor }) {
                   border: '1px solid var(--border-light)',
                 }}
               >
-                <img src={resolveImage(p.images[0])} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <img src={resolveImage(p.images?.[0], p.category)} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
             ))}
           </div>
