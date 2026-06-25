@@ -7,6 +7,7 @@ import Button from '../common/Button'
 import Icon from '../common/Icons'
 import { useApp } from '../../context/AppContext'
 import { resolveImage } from '../../api'
+import featuredProductsData from '../../data/featuredProductsData'
 
 const futureDate = new Date()
 futureDate.setDate(futureDate.getDate() + 2)
@@ -53,10 +54,20 @@ export default function FlashDeals() {
   const [deals, setDeals] = useState([])
   const [imgErrors, setImgErrors] = useState({})
 
+  const fallbackDeals = featuredProductsData.slice(0, 4).map((p, i) => ({
+    ...p,
+    discount: [18, 20, 22, 25][i],
+    originalPrice: [30, 40, 50, 60][i],
+    price: [25, 32, 39, 45][i],
+    vendorId: 'V001',
+    images: [],
+    _localImg: p.image,
+  }))
+
   useEffect(() => {
     api.products()
       .then(res => setDeals((res.data || []).filter(p => p.discount >= 18).slice(0, 4)))
-      .catch(() => setDeals([]))
+      .catch(() => setDeals(fallbackDeals))
   }, [])
 
   const handleAddToCart = (e, product) => {
@@ -67,6 +78,7 @@ export default function FlashDeals() {
 
   const imgSrc = (product) => {
     if (product.images && product.images[0]) return resolveImage(product.images[0])
+    if (product._localImg) return product._localImg
     return null
   }
 
