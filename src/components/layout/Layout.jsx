@@ -12,7 +12,7 @@ export default function Layout() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <main style={{ flex: 1, paddingTop: isHome ? 0 : 'var(--header-height)' }}>
+      <main style={{ flex: 1, paddingTop: isHome ? 0 : 'var(--page-padding, var(--header-height))' }}>
         <Outlet />
       </main>
       <Footer />

@@ -145,11 +145,16 @@ export default function HeroBanner() {
       <style>{`
         @media (max-width: 768px) {
           .desktop-arrow { display: none; }
-          .hero-section { min-height: 380px !important; }
-          .hero-section .container { padding-top: 40px !important; padding-bottom: 40px !important; }
+          .hero-section { min-height: 460px !important; }
+          .hero-section .container { padding-top: 130px !important; padding-bottom: 48px !important; }
         }
         @media (max-width: 480px) {
-          .hero-section { min-height: 320px !important; }
+          .hero-section { min-height: 440px !important; }
+          .hero-section .container { padding-top: 120px !important; padding-bottom: 40px !important; }
+        }
+        @media (max-width: 360px) {
+          .hero-section { min-height: 420px !important; }
+          .hero-section .container { padding-top: 110px !important; padding-bottom: 36px !important; }
         }
       `}</style>
     </section>

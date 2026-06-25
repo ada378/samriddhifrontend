@@ -2,12 +2,14 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api, { resolveImage } from '../../api'
 import Card from '../common/Card'
+import Icon from '../common/Icons'
 import { useApp } from '../../context/AppContext'
 
 export default function RecentlyViewed() {
   const navigate = useNavigate()
   const { recentlyViewed } = useApp()
   const [products, setProducts] = useState([])
+  const [imgErrors, setImgErrors] = useState({})
 
   useEffect(() => {
     api.products()
@@ -30,7 +32,16 @@ export default function RecentlyViewed() {
           {productItems.map(product => (
             <Card key={product.id} hover padding="0" style={{ cursor: 'pointer' }} onClick={() => navigate(`/products/${product.slug}`)}>
               <div style={{ aspectRatio: '1/1', background: 'var(--bg-gray)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0', overflow: 'hidden' }}>
-                <img src={resolveImage(product.images?.[0], product.category)} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                {!imgErrors[product.id] && resolveImage(product.images?.[0]) ? (
+                  <img
+                    src={resolveImage(product.images?.[0])}
+                    alt={product.name}
+                    onError={() => setImgErrors(prev => ({ ...prev, [product.id]: true }))}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                ) : (
+                  <Icon name="mdSalt" size={24} color="var(--text-muted)" />
+                )}
               </div>
               <div style={{ padding: 8 }}>
                 <p style={{ fontSize: '0.75rem', fontWeight: 600, margin: 0, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{product.name}</p>

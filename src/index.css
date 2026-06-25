@@ -64,6 +64,7 @@
 
   --max-width: 1280px;
   --header-height: 72px;
+  --page-padding: 106px;
 }
 
 *,
@@ -832,12 +833,12 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 
 /* ===== BOTTOM PADDING FOR MOBILE NAV ===== */
 @media (max-width: 768px) {
-  #root {
-    padding-bottom: 64px;
+  :root {
+    --page-padding: 120px;
   }
 
   main {
-    padding-bottom: 16px;
+    padding-bottom: 80px;
   }
 
   .container {
@@ -903,6 +904,28 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   /* Full-width inputs on mobile */
   input, select, textarea {
     font-size: 16px !important; /* prevent iOS zoom */
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .section {
+    padding: 24px 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding: 0 8px;
+  }
+
+  .section {
+    padding: 20px 0;
+  }
+
+  .section-title {
+    font-size: 1.125rem;
   }
 }
 

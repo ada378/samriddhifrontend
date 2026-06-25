@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import api from '../../api'
+import api, { resolveImage } from '../../api'
 
 export default function VendorProducts() {
   const [products, setProducts] = useState([])
@@ -64,7 +64,12 @@ export default function VendorProducts() {
             <tbody>
               {products.map(p => (
                 <tr key={p.id}>
-                  <td><img src={p.images?.[0]} alt="" style={{ width: 40, height: 40, borderRadius: 6, objectFit: 'cover' }} /></td>
+                  <td>
+                    <img src={resolveImage(p.images?.[0])} alt=""
+                      style={{ width: 40, height: 40, borderRadius: 6, objectFit: 'cover' }}
+                      onError={e => { e.target.style.display = 'none'; e.target.parentElement.innerHTML = '<span style=\'font-size:18px\'>🧂</span>' }}
+                    />
+                  </td>
                   <td style={{ fontWeight: 500 }}>{p.name}</td>
                   <td><span className="admin-badge admin-badge-info">{p.category}</span></td>
                   <td>₹{p.price?.toLocaleString()}</td>

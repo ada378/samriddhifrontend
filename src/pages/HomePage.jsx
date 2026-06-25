@@ -8,13 +8,15 @@ import BlogInsights from '../components/home/BlogInsights'
 import Newsletter from '../components/home/Newsletter'
 import TrustSignals from '../components/home/TrustSignals'
 import RecentlyViewed from '../components/home/RecentlyViewed'
+import FeaturedProducts from '../components/home/FeaturedProducts'
 
 export default function HomePage() {
   return (
     <>
       <HeroBanner />
-      <CategoryGrid />
       <FlashDeals />
+      <FeaturedProducts />
+      <CategoryGrid />
       <SeasonalBanner />
       <FeaturedVendors />
       <LiveStats />

@@ -74,9 +74,9 @@ export default function ProductCard({ product, view = 'grid' }) {
         onMouseEnter={() => setZoomed(true)}
         onMouseLeave={() => setZoomed(false)}
       >
-        {!imgError ? (
+        {!imgError && resolveImage(product.images?.[0]) ? (
           <img
-            src={resolveImage(product.images?.[0], product.category)}
+            src={resolveImage(product.images?.[0])}
             alt={product.name}
             onError={() => setImgError(true)}
             style={{
@@ -89,7 +89,7 @@ export default function ProductCard({ product, view = 'grid' }) {
           />
         ) : (
           <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', color: 'var(--text-muted)', background: 'var(--bg-gray)' }}>
-            <Icon name="mdSalt" size={24} />
+            <Icon name="mdSalt" size={48} />
           </div>
         )}
         {product.badges && product.badges.length > 0 && (

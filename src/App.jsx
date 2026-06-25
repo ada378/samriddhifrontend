@@ -2,6 +2,7 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import Layout from './components/layout/Layout'
 import HomePage from './pages/HomePage'
+import FeaturedProductDetailPage from './pages/FeaturedProductDetailPage'
 import ProductListingPage from './pages/ProductListingPage'
 import ProductDetailPage from './pages/ProductDetailPage'
 import ProductComparePage from './pages/ProductComparePage'
@@ -51,6 +52,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductListingPage />} />
         <Route path="/products/:slug" element={<ProductDetailPage />} />
+        <Route path="/featured/:slug" element={<FeaturedProductDetailPage />} />
         <Route path="/compare" element={<ProductComparePage />} />
         <Route path="/vendors" element={<VendorListingPage />} />
         <Route path="/vendors/:slug" element={<VendorProfilePage />} />

@@ -51,6 +51,7 @@ export default function FlashDeals() {
   const { addToCart, showToast } = useApp()
   const targetRef = useRef(futureDate)
   const [deals, setDeals] = useState([])
+  const [imgErrors, setImgErrors] = useState({})
 
   useEffect(() => {
     api.products()
@@ -66,7 +67,7 @@ export default function FlashDeals() {
 
   const imgSrc = (product) => {
     if (product.images && product.images[0]) return resolveImage(product.images[0])
-    return 'https://via.placeholder.com/400'
+    return null
   }
 
   return (
@@ -83,12 +84,21 @@ export default function FlashDeals() {
         <div className="flash-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16 }}>
           {deals.map(product => (
             <Card key={product.id} hover padding="0" style={{ cursor: 'pointer' }} onClick={() => navigate(`/products/${product.slug}`)}>
-              <div style={{ position: 'relative' }}>
-                <div style={{ aspectRatio: '1/1', background: 'var(--bg-gray)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0', overflow: 'hidden' }}>
-                  <img src={imgSrc(product)} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div style={{ position: 'relative' }}>
+                  <div style={{ aspectRatio: '1/1', background: 'var(--bg-gray)', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0', overflow: 'hidden' }}>
+                    {!imgErrors[product.id] && imgSrc(product) ? (
+                      <img
+                        src={imgSrc(product)}
+                        alt={product.name}
+                        onError={() => setImgErrors(prev => ({ ...prev, [product.id]: true }))}
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      />
+                    ) : (
+                      <Icon name="mdSalt" size={48} color="var(--text-muted)" />
+                    )}
+                  </div>
+                  <Badge variant="danger" style={{ position: 'absolute', top: 8, left: 8 }}>{product.discount}% OFF</Badge>
                 </div>
-                <Badge variant="danger" style={{ position: 'absolute', top: 8, left: 8 }}>{product.discount}% OFF</Badge>
-              </div>
               <div style={{ padding: 12 }}>
                 <h5 style={{ fontSize: '0.875rem', marginBottom: 6, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{product.name}</h5>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 10 }}>
