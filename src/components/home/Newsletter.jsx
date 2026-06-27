@@ -16,46 +16,92 @@ export default function Newsletter() {
   }
 
   return (
-    <section style={{ background: 'linear-gradient(135deg, #CC0C2C 0%, #A80923 100%)', padding: '48px 0' }}>
-      <div className="container" style={{ textAlign: 'center' }}>
-        <h2 style={{ color: '#fff', fontSize: 'clamp(1.25rem, 3vw, 1.75rem)', fontWeight: 700, marginBottom: 8 }}>
-          Get Wholesale Rate Alerts
-        </h2>
-        <p style={{ color: 'rgba(255,255,255,0.8)', fontSize: '0.9375rem', marginBottom: 24, maxWidth: 420, margin: '0 auto 24px' }}>
+    <section className="newsletter-section">
+      <div className="container newsletter-content">
+        <h2 className="newsletter-title">Get Wholesale Rate Alerts</h2>
+        <p className="newsletter-text">
           Subscribe to receive daily price updates, bulk deal notifications, and new vendor alerts.
         </p>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', gap: 0, maxWidth: 440, margin: '0 auto', borderRadius: 'var(--radius-md)', overflow: 'hidden' }}>
+        <form onSubmit={handleSubmit} className="newsletter-form">
           <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email address"
             required
-            style={{
-              flex: 1,
-              padding: '12px 16px',
-              border: 'none',
-              outline: 'none',
-              fontSize: '0.9375rem',
-              background: '#fff',
-              color: 'var(--text-primary)',
-              minWidth: 0,
-            }}
+            className="newsletter-input"
           />
-          <Button type="submit" style={{ borderRadius: 0, padding: '12px 24px', background: 'var(--accent)', color: 'var(--text-primary)', fontWeight: 700, whiteSpace: 'nowrap', border: 'none' }}>
+          <Button type="submit" className="newsletter-submit">
             Subscribe
           </Button>
         </form>
-        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.75rem', marginTop: 12 }}>
+        <p className="newsletter-disclaimer">
           No spam. Unsubscribe anytime.
         </p>
       </div>
       <style>{`
+        .newsletter-section {
+          background: linear-gradient(135deg, #2e6a40 0%, #1e4d2b 100%);
+          padding: 56px 0;
+        }
+        .newsletter-content {
+          text-align: center;
+        }
+        .newsletter-title {
+          color: #fff;
+          font-size: clamp(1.25rem, 3vw, 1.75rem);
+          font-weight: 700;
+          margin-bottom: 8px;
+        }
+        .newsletter-text {
+          color: rgba(255,255,255,0.8);
+          font-size: 0.9375rem;
+          margin-bottom: 24px;
+          max-width: 420px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .newsletter-form {
+          display: flex;
+          gap: 0;
+          max-width: 440px;
+          margin: 0 auto;
+          border-radius: var(--radius-md);
+          overflow: hidden;
+        }
+        .newsletter-input {
+          flex: 1;
+          padding: 12px 16px;
+          border: none;
+          outline: none;
+          font-size: 0.9375rem;
+          background: #fff;
+          color: var(--text-primary);
+          min-width: 0;
+        }
+        .newsletter-submit {
+          border-radius: 0 !important;
+          padding: 12px 24px !important;
+          background: var(--accent) !important;
+          color: var(--text-primary) !important;
+          font-weight: 700 !important;
+          white-space: nowrap !important;
+          border: none !important;
+        }
+        .newsletter-submit:hover {
+          background: #c49a52 !important;
+        }
+        .newsletter-disclaimer {
+          color: rgba(255,255,255,0.5);
+          font-size: 0.75rem;
+          margin-top: 12px;
+        }
+
         @media (max-width: 480px) {
-          section form { flex-direction: column !important; gap: 8px !important; border-radius: var(--radius-md) !important; }
-          section form input { border-radius: var(--radius-md) !important; width: 100% !important; text-align: center !important; }
-          section form button { border-radius: var(--radius-md) !important; width: 100% !important; }
-          section { padding: 32px 0 !important; }
+          .newsletter-section { padding: 40px 0 !important; }
+          .newsletter-form { flex-direction: column !important; gap: 8px !important; border-radius: var(--radius-md) !important; }
+          .newsletter-input { border-radius: var(--radius-md) !important; width: 100% !important; text-align: center !important; }
+          .newsletter-submit { border-radius: var(--radius-md) !important; width: 100% !important; }
         }
       `}</style>
     </section>

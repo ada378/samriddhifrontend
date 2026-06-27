@@ -4,17 +4,11 @@ import Icon from '../common/Icons'
 
 const tabs = [
   { path: '/', label: 'Home', icon: 'home' },
-  { path: '/vendors', label: 'Vendors', icon: 'vendors' },
+  { path: '/vendors', label: 'Vendors', icon: 'users' },
   { path: '/cart', label: 'Cart', icon: 'cart' },
-  { path: '/orders', label: 'Orders', icon: 'orders' },
-  { path: '/account', label: 'Account', icon: 'account' },
+  { path: '/orders', label: 'Orders', icon: 'package' },
+  { path: '/account', label: 'Account', icon: 'user' },
 ]
-
-function TabIcon({ name, active }) {
-  const color = active ? 'var(--primary)' : 'var(--text-muted)'
-  const iconName = { home: 'home', vendors: 'users', cart: 'cart', orders: 'package', account: 'user' }[name]
-  return iconName ? <Icon name={iconName} size={22} color={color} /> : null
-}
 
 export default function MobileNav() {
   const { pathname } = useLocation()
@@ -22,42 +16,85 @@ export default function MobileNav() {
   const cartCount = getCartCount()
 
   return (
-    <nav className="mobile-nav" style={{
-      position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 950,
-      background: 'var(--bg-white)', borderTop: '1px solid var(--border)',
-      display: 'none', justifyContent: 'space-around', alignItems: 'center',
-      padding: '6px 0', paddingBottom: 'calc(6px + env(safe-area-inset-bottom, 0px))',
-      boxShadow: '0 -2px 10px rgba(0,0,0,0.05)',
-    }}>
+    <nav className="mobile-nav">
       {tabs.map(tab => {
         const isActive = tab.path === '/' ? pathname === '/' : pathname.startsWith(tab.path)
         return (
-          <Link key={tab.path} to={tab.path} style={{
-            display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2,
-            textDecoration: 'none', padding: '4px 12px', position: 'relative',
-            color: isActive ? 'var(--primary)' : 'var(--text-muted)',
-          }}>
-            <div style={{ position: 'relative' }}>
-              <TabIcon name={tab.icon} active={isActive} />
+          <Link key={tab.path} to={tab.path} className={`mobile-nav-item ${isActive ? 'mobile-nav-item-active' : ''}`}>
+            <div className="mobile-nav-icon-wrap">
+              <Icon name={tab.icon} size={22} color={isActive ? 'var(--primary)' : 'var(--text-muted)'} />
               {tab.path === '/cart' && cartCount > 0 && (
-                <span style={{
-                  position: 'absolute', top: -6, right: -8, background: 'var(--primary)', color: 'white',
-                  fontSize: '0.5625rem', fontWeight: 700, minWidth: 16, height: 16, borderRadius: 8,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 3px',
-                }}>{cartCount > 99 ? '99+' : cartCount}</span>
+                <span className="mobile-nav-cart-badge">{cartCount > 99 ? '99+' : cartCount}</span>
               )}
             </div>
-            <span style={{ fontSize: '0.625rem', fontWeight: 600, lineHeight: 1 }}>{tab.label}</span>
-            {isActive && (
-              <span style={{
-                position: 'absolute', top: -6, left: '50%', transform: 'translateX(-50%)',
-                width: 20, height: 3, background: 'var(--primary)', borderRadius: 'var(--radius-full)',
-              }} />
-            )}
+            <span className="mobile-nav-label">{tab.label}</span>
+            {isActive && <span className="mobile-nav-indicator" />}
           </Link>
         )
       })}
       <style>{`
+        .mobile-nav {
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          z-index: 950;
+          background: var(--bg-white);
+          border-top: 1px solid var(--border);
+          display: none;
+          justify-content: space-around;
+          align-items: center;
+          padding: 6px 0;
+          padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px));
+          box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+        .mobile-nav-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 2px;
+          text-decoration: none;
+          padding: 4px 12px;
+          position: relative;
+          color: var(--text-muted);
+        }
+        .mobile-nav-item-active {
+          color: var(--primary);
+        }
+        .mobile-nav-icon-wrap {
+          position: relative;
+        }
+        .mobile-nav-cart-badge {
+          position: absolute;
+          top: -6px;
+          right: -8px;
+          background: var(--primary);
+          color: white;
+          font-size: 0.5625rem;
+          font-weight: 700;
+          min-width: 16px;
+          height: 16px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0 3px;
+        }
+        .mobile-nav-label {
+          font-size: 0.625rem;
+          font-weight: 600;
+          line-height: 1;
+        }
+        .mobile-nav-indicator {
+          position: absolute;
+          top: -6px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 20px;
+          height: 3px;
+          background: var(--primary);
+          border-radius: var(--radius-full);
+        }
         @media (max-width: 768px) {
           .mobile-nav { display: flex !important; }
         }

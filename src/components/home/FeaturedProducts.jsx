@@ -44,31 +44,30 @@ export default function FeaturedProducts() {
   const [imgErrors, setImgErrors] = useState({})
 
   return (
-    <section className="section" style={{ background: 'var(--bg-warm)' }}>
+    <section className="section" style={{ background: 'var(--bg-white)' }}>
       <div className="container">
-        <h2 className="section-title">Featured Products</h2>
+        <h2 className="section-title">Products in the Spotlight</h2>
         <p className="featured-subtitle">
           Know your salt — tap any product to read its complete details
         </p>
         <div className="featured-products-grid">
           {products.map(product => (
-              <Card key={product.id} hover padding="0" style={{ cursor: 'pointer', overflow: 'hidden' }} onClick={() => navigate(`/featured/${product.slug}`)}>
-              <div style={{ position: 'relative', aspectRatio: '1/1', background: 'var(--bg-gray)', overflow: 'hidden' }}>
+              <Card key={product.id} hover padding="0" className="featured-product-card" onClick={() => navigate(`/featured/${product.slug}`)}>
+              <div className="featured-img-wrap">
                 {!imgErrors[product.id] ? (
                   <img
                     src={product.image}
                     alt={product.name}
                     onError={() => setImgErrors(prev => ({ ...prev, [product.id]: true }))}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s ease' }}
                     className="featured-product-img"
                   />
                 ) : (
-                  <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2rem', color: 'var(--text-muted)', background: 'var(--bg-gray)' }}>
+                  <div className="featured-img-fallback">
                     <Icon name="mdSalt" size={48} />
                   </div>
                 )}
                 {product.badge && (
-                  <Badge variant={badgeVariantMap[product.badge] || 'primary'} style={{ position: 'absolute', top: 8, left: 8 }}>{product.badge}</Badge>
+                  <Badge variant={badgeVariantMap[product.badge] || 'primary'} className="featured-badge">{product.badge}</Badge>
                 )}
               </div>
               <div className="featured-card-content">
@@ -81,7 +80,7 @@ export default function FeaturedProducts() {
             </Card>
           ))}
         </div>
-        <div style={{ textAlign: 'center', marginTop: 32 }}>
+        <div className="featured-cta">
           <Button size="lg" onClick={() => navigate('/products')}>
             <Icon name="arrowRight" size={18} /> Browse All Products
           </Button>
@@ -99,13 +98,44 @@ export default function FeaturedProducts() {
         .featured-products-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
+          gap: 20px;
         }
-        .featured-product-img:hover {
-          transform: scale(1.1) !important;
+        .featured-product-card {
+          overflow: hidden;
+          border-radius: var(--radius-lg);
+        }
+        .featured-img-wrap {
+          position: relative;
+          aspect-ratio: 1/1;
+          background: var(--bg-gray);
+          overflow: hidden;
+        }
+        .featured-product-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+        .featured-product-card:hover .featured-product-img {
+          transform: scale(1.1);
+        }
+        .featured-img-fallback {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2rem;
+          color: var(--text-muted);
+          background: var(--bg-gray);
+        }
+        .featured-badge {
+          position: absolute;
+          top: 8px;
+          left: 8px;
         }
         .featured-card-content {
-          padding: 12px;
+          padding: 14px;
           display: flex;
           flex-direction: column;
           flex: 1;
@@ -130,8 +160,12 @@ export default function FeaturedProducts() {
         .featured-card-btn {
           align-self: stretch;
         }
+        .featured-cta {
+          text-align: center;
+          margin-top: 32px;
+        }
         @media (max-width: 1024px) {
-          .featured-products-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+          .featured-products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
         }
         @media (max-width: 768px) {
           .featured-products-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -140,7 +174,7 @@ export default function FeaturedProducts() {
           .featured-card-desc { font-size: 0.75rem; -webkit-line-clamp: 3; }
         }
         @media (max-width: 560px) {
-          .featured-products-grid { grid-template-columns: 1fr; gap: 14px; }
+          .featured-products-grid { grid-template-columns: 1fr; gap: 16px; }
           .featured-card-content { padding: 12px 16px; }
           .featured-card-title { font-size: 1rem; }
           .featured-card-desc { font-size: 0.85rem; -webkit-line-clamp: 4; }

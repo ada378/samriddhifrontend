@@ -62,99 +62,180 @@ export default function HeroBanner() {
     <section
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-        minHeight: '580px',
-        display: 'flex',
-        alignItems: 'center',
-      }}
       className="hero-section"
     >
       {slides.map((slide, i) => (
         <div
           key={i}
+          className="hero-slide"
           style={{
-            position: 'absolute',
-            inset: 0,
-            background: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("${slide.image}") center/cover no-repeat`,
             opacity: i === active ? 1 : 0,
             transform: i === active ? 'scale(1)' : 'scale(1.05)',
-            transition: 'opacity 0.6s ease, transform 0.6s ease',
-            display: 'flex',
-            alignItems: 'center',
           }}
         >
-          <div className="container" style={{ position: 'relative', zIndex: 2, paddingTop: 80, paddingBottom: 80 }}>
-            <div style={{ maxWidth: 640 }}>
-              <h1 style={{ color: '#fff', fontSize: 'clamp(1.75rem, 5vw, 3rem)', fontWeight: 800, marginBottom: 16, lineHeight: 1.15 }}>
-                {slide.headline}
-              </h1>
-              <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 'clamp(0.9375rem, 2vw, 1.125rem)', marginBottom: 32, lineHeight: 1.6, maxWidth: 520 }}>
-                {slide.subtext}
-              </p>
-              <Button size="lg" onClick={() => navigate('/products')}>
-                <Icon name="play" size={18} />
+          <div className="hero-slide-bg" style={{ backgroundImage: `url("${slide.image}")` }} />
+          <div className="hero-overlay" />
+          <div className="container hero-content">
+            <div className="hero-text">
+              <h1 className="hero-headline">{slide.headline}</h1>
+              <p className="hero-subtext">{slide.subtext}</p>
+              <Button size="lg" className="hero-btn" onClick={() => navigate('/products')}>
+                <Icon name="arrowRight" size={18} />
                 Shop Now
               </Button>
             </div>
-            <div style={{ position: 'absolute', right: 0, top: '50%', transform: 'translateY(-50%)', opacity: 0.1, pointerEvents: 'none', fontSize: 'clamp(8rem, 20vw, 18rem)', color: '#fff', fontWeight: 900, lineHeight: 1 }}>
-              <Icon name="mdSalt" size={20} />
-            </div>
           </div>
-          <div style={{ position: 'absolute', inset: 0, background: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }} />
         </div>
       ))}
 
-      <div style={{ position: 'absolute', bottom: 32, left: 0, right: 0, display: 'flex', justifyContent: 'center', gap: 10, zIndex: 5 }}>
+      <div className="hero-dots">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => goTo(i)}
-            style={{
-              width: i === active ? 28 : 10,
-              height: 10,
-              borderRadius: 5,
-              border: 'none',
-              background: i === active ? '#fff' : 'rgba(255,255,255,0.4)',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              padding: 0,
-            }}
+            className={`hero-dot ${i === active ? 'hero-dot-active' : ''}`}
           />
         ))}
       </div>
 
       <button
         onClick={() => goTo((active - 1 + slides.length) % slides.length)}
-        style={{ position: 'absolute', left: 16, top: '50%', transform: 'translateY(-50%)', zIndex: 5, background: 'rgba(255,255,255,0.15)', border: 'none', borderRadius: '50%', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', cursor: 'pointer', backdropFilter: 'blur(4px)', transition: 'background 0.2s' }}
-        className="desktop-arrow"
+        className="hero-arrow hero-arrow-left"
         aria-label="Previous slide"
       >
         <Icon name="chevronLeft" size={20} />
       </button>
       <button
         onClick={() => goTo((active + 1) % slides.length)}
-        style={{ position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)', zIndex: 5, background: 'rgba(255,255,255,0.15)', border: 'none', borderRadius: '50%', width: 44, height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', cursor: 'pointer', backdropFilter: 'blur(4px)', transition: 'background 0.2s' }}
-        className="desktop-arrow"
+        className="hero-arrow hero-arrow-right"
         aria-label="Next slide"
       >
         <Icon name="chevronRight" size={20} />
       </button>
 
       <style>{`
+        .hero-section {
+          position: relative;
+          overflow: hidden;
+          min-height: 580px;
+          display: flex;
+          align-items: center;
+          background: #000;
+        }
+        .hero-slide {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .hero-slide-bg {
+          position: absolute;
+          inset: 0;
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+        .hero-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0,0,0,0.5);
+        }
+        .hero-content {
+          position: relative;
+          z-index: 2;
+          padding-top: 100px;
+          padding-bottom: 80px;
+        }
+        .hero-text {
+          max-width: 620px;
+        }
+        .hero-headline {
+          color: #fff;
+          font-size: clamp(1.75rem, 5vw, 3rem);
+          font-weight: 800;
+          margin-bottom: 16px;
+          line-height: 1.15;
+          font-family: var(--font-heading);
+        }
+        .hero-subtext {
+          color: rgba(255,255,255,0.85);
+          font-size: clamp(0.9375rem, 2vw, 1.125rem);
+          margin-bottom: 32px;
+          line-height: 1.6;
+          max-width: 520px;
+        }
+        .hero-btn {
+          background: var(--accent) !important;
+          color: var(--text-primary) !important;
+          border-color: var(--accent) !important;
+          font-weight: 700 !important;
+        }
+        .hero-btn:hover {
+          background: #c49a52 !important;
+          border-color: #c49a52 !important;
+          box-shadow: var(--shadow-accent) !important;
+        }
+        .hero-dots {
+          position: absolute;
+          bottom: 32px;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          z-index: 5;
+        }
+        .hero-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 5px;
+          border: none;
+          background: rgba(255,255,255,0.4);
+          cursor: pointer;
+          transition: all 0.3s ease;
+          padding: 0;
+        }
+        .hero-dot-active {
+          width: 28px;
+          background: var(--accent);
+        }
+        .hero-arrow {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 5;
+          background: rgba(255,255,255,0.15);
+          border: none;
+          border-radius: 50%;
+          width: 44px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          cursor: pointer;
+          backdrop-filter: blur(4px);
+          transition: background 0.2s;
+        }
+        .hero-arrow:hover {
+          background: rgba(255,255,255,0.3);
+        }
+        .hero-arrow-left { left: 16px; }
+        .hero-arrow-right { right: 16px; }
+
         @media (max-width: 768px) {
-          .desktop-arrow { display: none; }
+          .hero-arrow { display: none; }
           .hero-section { min-height: 460px !important; }
-          .hero-section .container { padding-top: 130px !important; padding-bottom: 48px !important; }
+          .hero-content { padding-top: 130px !important; padding-bottom: 48px !important; }
         }
         @media (max-width: 480px) {
           .hero-section { min-height: 440px !important; }
-          .hero-section .container { padding-top: 120px !important; padding-bottom: 40px !important; }
+          .hero-content { padding-top: 120px !important; padding-bottom: 40px !important; }
         }
         @media (max-width: 360px) {
           .hero-section { min-height: 420px !important; }
-          .hero-section .container { padding-top: 110px !important; padding-bottom: 36px !important; }
+          .hero-content { padding-top: 110px !important; padding-bottom: 36px !important; }
         }
       `}</style>
     </section>

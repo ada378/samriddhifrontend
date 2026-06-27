@@ -1,65 +1,79 @@
 import Icon from '../common/Icons'
 
 const badges = [
-  { icon: <Icon name="check" size={20} color="var(--success)" />, label: 'FSSAI Certified', color: '#1D9E75' },
-  { icon: <Icon name="shield" size={20} color="var(--info)" />, label: 'ISO Verified', color: '#534AB7' },
-  { icon: <Icon name="award" size={20} color="var(--accent)" />, label: '100% Pure', color: '#CC0C2C' },
-  { icon: <Icon name="lock" size={20} color="var(--primary)" />, label: 'Secure Payments', color: '#1A1A2E' },
-  { icon: <Icon name="truck" size={20} color="var(--secondary)" />, label: 'Pan India Delivery', color: '#E8B830' },
+  { label: 'FSSAI Certified', color: '#2e6a40' },
+  { label: 'ISO 22000', color: '#d4ac69' },
+  { label: 'GMP Certified', color: '#1e4d2b' },
+  { label: 'HACCP Certified', color: '#3d8b4f' },
+  { label: 'India Organic', color: '#c49a52' },
 ]
 
 export default function TrustSignals() {
   return (
-    <section style={{ background: 'var(--bg-gray)', padding: '20px 0', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+    <section className="cert-section">
       <div className="container">
-        <div className="trust-grid">
+        <h2 className="section-title">Our Certifications</h2>
+        <p className="cert-subtitle">
+          We maintain the highest standards of quality and safety
+        </p>
+        <div className="cert-grid">
           {badges.map((item, i) => (
-            <div key={i} className="trust-item">
-              <span className="trust-icon">{item.icon}</span>
-              <span className="trust-label">{item.label}</span>
+            <div key={i} className="cert-item">
+              <div className="cert-icon">
+                <Icon name="checkCircle" size={24} color={item.color} />
+              </div>
+              <span className="cert-label">{item.label}</span>
             </div>
           ))}
         </div>
       </div>
 
       <style>{`
-        .trust-grid {
-          display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          gap: 12px;
+        .cert-section {
+          padding: var(--space-5xl) 0;
+          background: var(--bg-white);
+          border-top: 1px solid var(--border);
+          border-bottom: 1px solid var(--border);
         }
-        .trust-item {
+        .cert-subtitle {
+          text-align: center;
+          color: var(--text-muted);
+          font-size: 0.9375rem;
+          margin-top: -20px;
+          margin-bottom: 40px;
+        }
+        .cert-grid {
           display: flex;
-          align-items: center;
           justify-content: center;
-          gap: 8px;
-          padding: 6px 8px;
+          align-items: center;
+          gap: 40px;
+          flex-wrap: wrap;
         }
-        .trust-icon {
+        .cert-item {
           display: flex;
           align-items: center;
-          flex-shrink: 0;
+          gap: 10px;
+          padding: 12px 24px;
+          background: var(--bg-gray);
+          border-radius: var(--radius-full);
+          border: 1px solid var(--border);
         }
-        .trust-label {
-          font-size: 0.8125rem;
-          font-weight: 600;
-          color: var(--text-secondary);
-          white-space: nowrap;
+        .cert-label {
+          font-size: 0.875rem;
+          font-weight: 700;
+          color: var(--text-primary);
+          font-family: var(--font-heading);
         }
+
         @media (max-width: 768px) {
-          .trust-grid { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
-          .trust-item { gap: 6px !important; padding: 4px 6px !important; }
-          .trust-label { font-size: 0.75rem !important; }
+          .cert-grid { gap: 16px; }
+          .cert-item { padding: 8px 16px; }
+          .cert-label { font-size: 0.8125rem; }
         }
         @media (max-width: 480px) {
-          .trust-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 6px !important; }
-          .trust-item { flex-direction: column !important; gap: 4px !important; padding: 8px 4px !important; text-align: center !important; }
-          .trust-label { font-size: 0.6875rem !important; white-space: normal !important; word-break: break-word !important; }
-        }
-        @media (max-width: 360px) {
-          .trust-grid { grid-template-columns: 1fr 1fr !important; gap: 4px !important; }
-          .trust-item { padding: 6px 2px !important; }
-          .trust-label { font-size: 0.625rem !important; }
+          .cert-grid { gap: 12px; }
+          .cert-item { padding: 6px 14px; }
+          .cert-label { font-size: 0.75rem; }
         }
       `}</style>
     </section>

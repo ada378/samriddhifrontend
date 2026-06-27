@@ -1,33 +1,33 @@
 :root {
-  --primary: #1A56DB;
-  --primary-dark: #1342A8;
-  --primary-light: #E8EFFD;
-  --secondary: #1A1A2E;
-  --secondary-light: #2D2D4A;
-  --accent: #CC0C2C;
-  --accent-light: #FDE8EC;
-  --bg-warm: #F8FAFC;
-  --bg-white: #FFFFFF;
-  --bg-gray: #F1F5F9;
-  --bg-dark: #0F172A;
-  --success: #1D9E75;
-  --success-light: #E8F8F2;
-  --danger: #CC0C2C;
-  --danger-light: #FDE8E8;
-  --warning: #EF9F27;
-  --warning-light: #FEF3DC;
-  --info: #1A56DB;
-  --info-light: #E8EFFD;
+  --primary: #2e6a40;
+  --primary-dark: #1e4d2b;
+  --primary-light: #e8f5e9;
+  --secondary: #1a1a2e;
+  --secondary-light: #2d2d4a;
+  --accent: #d4ac69;
+  --accent-light: #faf3e0;
+  --bg-warm: #f9fafb;
+  --bg-white: #ffffff;
+  --bg-gray: #f1f5f9;
+  --bg-dark: #0f172a;
+  --success: #1d9e75;
+  --success-light: #e8f8f2;
+  --danger: #cc0c2c;
+  --danger-light: #fde8e8;
+  --warning: #ef9f27;
+  --warning-light: #fef3dc;
+  --info: #2e6a40;
+  --info-light: #e8f5e9;
 
-  --text-primary: #0F172A;
+  --text-primary: #0f172a;
   --text-secondary: #475569;
-  --text-muted: #94A3B8;
-  --text-light: #FFFFFF;
-  --text-link: #1A56DB;
+  --text-muted: #94a3b8;
+  --text-light: #ffffff;
+  --text-link: #2e6a40;
 
-  --border: #E2E8F0;
-  --border-light: #F1F5F9;
-  --border-dark: #CBD5E1;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --border-dark: #cbd5e1;
 
   --radius-xs: 4px;
   --radius-sm: 6px;
@@ -52,10 +52,11 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-primary: 0 4px 14px rgba(26, 86, 219, 0.3);
+  --shadow-primary: 0 4px 14px rgba(46, 106, 64, 0.3);
+  --shadow-accent: 0 4px 14px rgba(212, 172, 105, 0.3);
 
-  --font-sans: 'Noto Sans Devanagari', 'Inter', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Poppins', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --font-sans: 'Open Sans', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Montserrat', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   --transition-fast: 150ms ease;
@@ -139,7 +140,7 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 }
 
 .section {
-  padding: var(--space-3xl) 0;
+  padding: var(--space-5xl) 0;
 }
 
 .section-title {
@@ -157,9 +158,17 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
   display: block;
   width: 60px;
   height: 4px;
-  background: var(--primary);
+  background: var(--accent);
   border-radius: var(--radius-full);
   margin: var(--space-sm) auto 0;
+}
+
+.section-title-left {
+  text-align: left;
+}
+
+.section-title-left::after {
+  margin: var(--space-sm) 0 0;
 }
 
 .grid-12 { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-xl); }
@@ -220,8 +229,9 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 }
 
 .btn-accent:hover:not(:disabled) {
-  background: #D4A52A;
-  border-color: #D4A52A;
+  background: #c49a52;
+  border-color: #c49a52;
+  box-shadow: var(--shadow-accent);
 }
 
 .btn-sm { padding: var(--space-xs) var(--space-lg); font-size: 0.8125rem; }
@@ -637,7 +647,7 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
 
 .otp-input input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(204, 12, 44, 0.15);
+  box-shadow: 0 0 0 3px rgba(46, 106, 64, 0.15);
 }
 
 .otp-input input.filled {
@@ -850,20 +860,17 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
     padding: var(--space-lg);
   }
 
-  /* Ensure grid images don't overflow */
   .product-grid img,
   .card img {
     max-width: 100%;
     height: auto;
   }
 
-  /* Stack filter + content on mobile */
   .product-listing-wrapper,
   .vendor-listing-wrapper {
     flex-direction: column !important;
   }
 
-  /* Mobile filter drawer */
   .mobile-filter-drawer {
     position: fixed;
     top: 0;
@@ -901,9 +908,8 @@ input, textarea, select { font-family: inherit; font-size: inherit; }
     min-height: 44px;
   }
 
-  /* Full-width inputs on mobile */
   input, select, textarea {
-    font-size: 16px !important; /* prevent iOS zoom */
+    font-size: 16px !important;
   }
 
   .container {
